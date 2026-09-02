@@ -36,7 +36,7 @@ when {
     }
 }
             steps {
-                echo 'Deploying to ${params.ENVIRONMENT'
+                echo 'Deploying to ${params.ENVIRONMENT'and "Building ${APP_NAME} application..."
             }
         }
     }
