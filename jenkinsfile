@@ -22,10 +22,11 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
+    steps {
+        echo 'Running tests...'
+        echo "Selected environment: ${params.ENVIRONMENT}"
+    }
+}
 
         stage('Code Quality') {
             steps {
