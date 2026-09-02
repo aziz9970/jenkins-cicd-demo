@@ -1,20 +1,23 @@
 pipeline {
     agent any
-environment {
-    APP_NAME = 'jenkins-demo'
-}
-parameters {
+
+    environment {
+        APP_NAME = 'jenkins-demo'
+    }
+
+    parameters {
         choice(
             name: 'ENVIRONMENT',
             choices: ['dev', 'staging', 'production'],
-            description: 'production'
+            description: 'Select deployment environment'
         )
     }
 
     stages {
+
         stage('Build') {
             steps {
-                echo 'echo "Building ${APP_NAME} application..."'
+                echo "Building ${APP_NAME} application..."
             }
         }
 
@@ -23,20 +26,22 @@ parameters {
                 echo 'Running tests...'
             }
         }
-stage('Code Quality') {
+
+        stage('Code Quality') {
             steps {
                 echo 'Checking code quality...'
             }
         }
 
         stage('Deploy') {
-when {
-    expression {
-        params.ENVIRONMENT == 'production'
-    }
-}
+            when {
+                expression {
+                    params.ENVIRONMENT == 'production'
+                }
+            }
+
             steps {
-                echo 'echo "Deploying ${APP_NAME} to ${params.ENVIRONMENT} environment..."'
+                echo "Deploying ${APP_NAME} to ${params.ENVIRONMENT} environment..."
             }
         }
     }
