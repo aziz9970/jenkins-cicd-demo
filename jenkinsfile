@@ -1,5 +1,12 @@
 pipeline {
     agent any
+parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'staging', 'production'],
+            description: 'Select environment'
+        )
+    }
 
     stages {
         stage('Build') {
@@ -21,7 +28,7 @@ stage('Code Quality') {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
+                echo 'Deploying to ${params.ENVIRONMENT'
             }
         }
     }
