@@ -28,6 +28,11 @@ stage('Code Quality') {
 
         stage('Deploy') {
             steps {
+when {
+    expression {
+        params.ENVIRONMENT == 'production'
+    }
+}
                 echo 'Deploying to ${params.ENVIRONMENT'
             }
         }
